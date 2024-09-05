@@ -7,17 +7,35 @@ SOURCE_PATH=./service/sjenkins
 
 cp -a -f ${SOURCE_PATH} /usr/local/var/
 
-# 替换服务器配置
+# 获取CPU的型号
+cpu_model=$(sysctl -n machdep.cpu.brand_string)
+ 
+# /usr/local/etc/nginx/nginx.conf
+# M1 系统路径
+# /opt/homebrew/etc/nginx/nginx.conf
+
+MAC_TYPE=/opt/homebrew
+# 使用grep进行匹配判断
+if echo "$cpu_model" | grep -q 'Apple M'; then
+    # echo "This is an Apple M chip."
+    MAC_TYPE=/opt/homebrew
+elif echo "$cpu_model" | grep -q 'GenuineIntel'; then
+    # echo "This is an Intel processor."
+    MAC_TYPE=/usr/local
+else
+    # echo "Unknown processor type."
+fi
+
+
+# 获取CPU的型号
 # 源目录
 SOURCE_SSL=./service/ssl
 SOURCE_Conf=./service/nginx.conf
 #目的目录
-DESTINATION_SSL=/opt/homebrew/etc/nginx
-DESTINATION_Conf=/opt/homebrew/etc/nginx/nginx.conf
+DESTINATION_SSL=${MAC_TYPE}/etc/nginx
+DESTINATION_Conf=${MAC_TYPE}/etc/nginx/nginx.conf
 
-# /usr/local/etc/nginx/nginx.conf
-# M1 系统路径
-# /opt/homebrew/etc/nginx/nginx.conf
+
 
 cp -a -f ${SOURCE_SSL} ${DESTINATION_SSL}
 
