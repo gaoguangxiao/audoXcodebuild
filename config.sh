@@ -24,6 +24,7 @@ elif echo "$cpu_model" | grep -q 'GenuineIntel'; then
     MAC_TYPE=/usr/local
 else
     # echo "Unknown processor type."
+    MAC_TYPE=/usr/local
 fi
 
 
