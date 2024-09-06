@@ -1,8 +1,8 @@
 #读取打包的配置信息
 exportName=$1
-ipa_name=$2
+serviceURL=$2
 project_name=$3
-serviceURL=$4
+
 infolistPath="./build/${project_name}.xcarchive/Info.plist"
 #echo "****打包配置信息的路径：${infolistPath}"
 
@@ -36,7 +36,7 @@ cat << EOF > ./${exportName}/manifest.plist
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string>${serviceURL}/${ipa_name}.ipa</string>
+					<string>${serviceURL}</string>
 				</dict>
 			</array>
 			<key>metadata</key>
