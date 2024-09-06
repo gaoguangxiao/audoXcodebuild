@@ -1,8 +1,8 @@
 
 exportFilePath=$1
-//IPA名称
+#IPA名称
 scheme_name=$2
-//描述
+#描述
 commitTmpDes=$3
 
 # 服务器路径

@@ -4,7 +4,7 @@ serviceURL=$2
 project_name=$3
 
 infolistPath="./build/${project_name}.xcarchive/Info.plist"
-#echo "****打包配置信息的路径：${infolistPath}"
+echo "****打包配置信息的路径：${infolistPath}"
 
 #读取bundleId
 bundleID=$(/usr/libexec/PlistBuddy -c "print ApplicationProperties:CFBundleIdentifier" "${infolistPath}")
