@@ -1,7 +1,45 @@
 exportName=$1
 projectDes=$2
 serviceURL=$3
+project_name=$4
 #echo "网页收到："${aimusicDes}
+
+#读取版本号
+infolistPath="./build/${project_name}.xcarchive/Info.plist"
+bundleShortVersion=$(/usr/libexec/PlistBuddy -c "print ApplicationProperties:CFBundleShortVersionString" "${infolistPath}")
+
+#获取提交ID
+branchCommitID(){
+git rev-parse HEAD
+}
+CommitID=$(branchCommitID $1)
+# echo "编译CommitID："${CommitID}
+
+#获取分支名字
+branchCommitName(){
+git branch -r --contains ${CommitID}
+}
+branchName=$(branchCommitName $1)
+branchName=${branchName##*/}
+
+#提交信息
+branchCommitMessage(){
+git log --pretty=format:"%s"  -1
+}
+#获取提交作者
+branchCommitAuthor(){
+git log --pretty=format:"%an"  -1
+}
+
+commitMessage=$(branchCommitMessage $1)
+commitAuthor=$(branchCommitAuthor $1)
+
+commitTmpDes="${projectDes}【分支名：${branchName}、版本号：${bundleShortVersion}、打包模式：${development_mode}】${commitMessage}、作者:${commitAuthor}"
+
+#过滤空格
+commitTmpDes=${commitTmpDes// /-}
+#生成编译描述
+echo "Create buildDes：${commitTmpDes}"
 
 cat << EOF > ./${exportName}/ExportInstall.html
 <!doctype html>
@@ -22,7 +60,7 @@ cat << EOF > ./${exportName}/ExportInstall.html
     </div>
     <div>
         <img height="300" src="${serviceURL}/${exportName}/ExportUpload.png"/>
-        <p>$projectDes</p>
+        <p>$commitTmpDes</p>
         <p>版本地址：$exportName</p>
     </div>
     

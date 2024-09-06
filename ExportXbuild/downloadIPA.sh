@@ -1,9 +1,11 @@
 
 exportFilePath=$1
+#项目名称
+project_name=$2
 #IPA名称
-scheme_name=$2
-#描述
-commitTmpDes=$3
+scheme_name=$3
+#基本描述
+buildDes=$4
 
 # 服务器路径
 servicePath=/usr/local/var/sjenkins/
@@ -16,10 +18,10 @@ echo '*** 正在 制作 plist html png ***'
 serviceURL=https://${serviceName}
 
 chmod +x ~/audoXcodebuild/ExportXbuild/manifest.sh
-~/audoXcodebuild/ExportXbuild/manifest.sh ${exportFilePath} ${serviceURL}/${exportFilePath}/${scheme_name}.ipa ${scheme_name}
+~/audoXcodebuild/ExportXbuild/manifest.sh ${exportFilePath} ${serviceURL}/${exportFilePath}/${scheme_name}.ipa ${project_name}
 
 chmod +x ~/audoXcodebuild/ExportXbuild/createHtml.sh
-~/audoXcodebuild/ExportXbuild/createHtml.sh ${exportFilePath} ${commitTmpDes} ${serviceURL}
+~/audoXcodebuild/ExportXbuild/createHtml.sh ${exportFilePath} ${buildDes} ${serviceURL} ${project_name}
 
 htmlURL=${serviceURL}/${exportFilePath}/ExportInstall.html
 

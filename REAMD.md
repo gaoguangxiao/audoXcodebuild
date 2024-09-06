@@ -15,5 +15,9 @@ Xbuildipa.sh文件放于项目目录
 对项目进行编译，归档、导出
 
 1、制作ipa下载的网页到导出目录
-2、移动ipa文件夹到服务器
-3、读取项目版本号、提交信息等功能
+
+downloadIPA.sh：移动ipa文件夹到服务器
+
+createhtml.sh：创建html文件
+manifest.sh读取项目版本号、提交信息等功能
+
