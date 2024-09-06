@@ -16,7 +16,7 @@ echo '*** 正在 制作 plist html png ***'
 serviceURL=https://${serviceName}
 
 chmod +x ~/audoXcodebuild/ExportXbuild/manifest.sh
-~/audoXcodebuild/ExportXbuild/manifest.sh ${exportFilePath} ${serviceURL}/${exportFilePath}/${scheme_name}.ipa
+~/audoXcodebuild/ExportXbuild/manifest.sh ${exportFilePath} ${serviceURL}/${exportFilePath}/${scheme_name}.ipa ${scheme_name}
 
 chmod +x ~/audoXcodebuild/ExportXbuild/createHtml.sh
 ~/audoXcodebuild/ExportXbuild/createHtml.sh ${exportFilePath} ${commitTmpDes} ${serviceURL}
