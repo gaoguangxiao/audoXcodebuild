@@ -10,7 +10,7 @@ buildDes=$4
 # 服务器路径
 servicePath=/usr/local/var/sjenkins/
 # 本机地址
-serviceName=localhost
+serviceName=$(ifconfig -a | grep inet | grep -v 127.0.0.1 | grep -v inet6 | awk '{print $2}' | tr -d "addr:")
 # 证书路径
 serverCA=https://${serviceName}/server.crt
 
